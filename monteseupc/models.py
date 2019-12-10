@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 # Create your models here.
 
 
@@ -23,26 +24,26 @@ memoria_suportada = [
 ]
 
 tamanho_memorias = [
-    ('1', '4GB'),
-    ('2', '8GB'),
-    ('3', '16GB'),
-    ('4', '32GB'),
-    ('5', '64GB'),
+    ('4GB', '4GB'),
+    ('8GB', '8GB'),
+    ('16GB', '16GB'),
+    ('32GB', '32GB'),
+    ('64GB', '64GB'),
 ]
 
 class Monte_seu_pc(models.Model):
-    user = get_user_model()
     processador = models.ForeignKey("Processador", verbose_name=("Processador"), on_delete=models.CASCADE)
     placa_mae = models.ForeignKey("Placa_mae", verbose_name=("Placa mae"), on_delete=models.CASCADE)
     memoria = models.ForeignKey("Memoria", verbose_name=("Memoria Ram"), on_delete=models.CASCADE)
     qnt_memoria = models.IntegerField("Quantidade de Memoria", validators=[MinValueValidator(1),MaxValueValidator(4)])
     tamanho_da_memoria = models.CharField("Tamanho da Memoria",choices=tamanho_memorias, max_length=50)
-    placa_de_video = models.ForeignKey("Placa_de_video", verbose_name=("Placa de Video"), on_delete=models.CASCADE)
+    placa_de_video = models.ForeignKey("Placa_de_video", verbose_name=("Placa de Video"), on_delete=models.CASCADE, null=True)
+
     class Meta:
         verbose_name = ("")
         verbose_name_plural = ("s")
         def __str__(self):
-            return self.user
+            return self.memoria
     
 class Processador(models.Model):
     produto = models.CharField("Produto", max_length=50)
