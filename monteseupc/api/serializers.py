@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer, SlugRelatedField, StringRelatedField, HyperlinkedIdentityField, ValidationError
 from monteseupc.models import *
-
+import re
 
 def validator_marca_procesador(value):
     if str(value['placa_mae'].processadores_suportados) == "ambos":
@@ -15,6 +15,13 @@ def validacao_placa_de_video(value):
     return value
 
 def validacao_quantidade_de_slots(value):
+    total_de_memoria_escolhida = int(re.sub("[^0-9]",'',value['tamanho_da_memoria'])) * int(value['qnt_memoria'])
+    memoria_suportada = int(re.sub("[^0-9]",'',str(value['placa_mae'].memom_suportada)))
+    if total_de_memoria_escolhida > memoria_suportada :
+        raise ValidationError('A placa mãe so suporta {}GB de memoria, por favor escolha igual ou menor'.format(memoria_suportada, total_de_memoria_escolhida ))
+    return value
+
+def validacao_quantidade_de_memoria(value):
     if value['qnt_memoria'] > value['placa_mae'].slots:
         raise ValidationError('A Placa mãe so possui {} slots, selecione uma quantidade menor ou igual.'.format(value['placa_mae'].slots))
     return value
