@@ -62,7 +62,7 @@ class MonteseupcSerializer(ModelSerializer):
     class Meta:
         model = Monte_seu_pc
         fields = ['id', 'processador', 'placa_mae', 'memoria',
-                  'qnt_memoria', 'tamanho_da_memoria', 'placa_de_video']
+                  'quantidade_de_memoria', 'tamanho_da_memoria', 'placa_de_video']
         validators = [
             validator_marca_procesador,
             validacao_placa_de_video,
