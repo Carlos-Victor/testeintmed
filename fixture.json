@@ -87,7 +87,7 @@
     },
     {
         "model": "monteseupc.Placa_de_video",
-        "pk": 1,
+        "pk": 3,
         "fields": {
             "produto": "Placa de Video Radeon RX 580 8GB"
         }

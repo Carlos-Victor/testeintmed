@@ -23,18 +23,18 @@ memoria_suportada = [
 ]
 
 tamanho_memorias = [
-    ('1', '4'),
-    ('2', '8'),
-    ('3', '16'),
-    ('4', '32'),
-    ('5', '64'),
+    ('1', '4GB'),
+    ('2', '8GB'),
+    ('3', '16GB'),
+    ('4', '32GB'),
+    ('5', '64GB'),
 ]
 
 class Monte_seu_pc(models.Model):
     user = get_user_model()
     processador = models.ForeignKey("Processador", verbose_name=("Processador"), on_delete=models.CASCADE)
     placa_mae = models.ForeignKey("Placa_mae", verbose_name=("Placa mae"), on_delete=models.CASCADE)
-    Memoria = models.ForeignKey("Memoria", verbose_name=("Memoria Ram"), on_delete=models.CASCADE)
+    memoria = models.ForeignKey("Memoria", verbose_name=("Memoria Ram"), on_delete=models.CASCADE)
     qnt_memoria = models.IntegerField("Quantidade de Memoria", validators=[MinValueValidator(1),MaxValueValidator(4)])
     tamanho_da_memoria = models.CharField("Tamanho da Memoria",choices=tamanho_memorias, max_length=50)
     placa_de_video = models.ForeignKey("Placa_de_video", verbose_name=("Placa de Video"), on_delete=models.CASCADE)
