@@ -20,7 +20,7 @@ def validacao_placa_de_video(value):
 
 def validacao_quantidade_de_memoria(value):
     total_de_memoria_escolhida = int(
-        re.sub("[^0-9]", '', value['tamanho_da_memoria'])) * int(value['qnt_memoria'])
+        re.sub("[^0-9]", '', value['tamanho_da_memoria'])) * int(value['quantidade_de_memoria'])
     memoria_suportada = int(
         re.sub("[^0-9]", '', str(value['placa_mae'].memom_suportada)))
     if total_de_memoria_escolhida > memoria_suportada:
@@ -30,7 +30,7 @@ def validacao_quantidade_de_memoria(value):
 
 
 def validacao_quantidade_de_slots(value):
-    if value['qnt_memoria'] > value['placa_mae'].slots:
+    if value['quantidade_de_memoria'] > value['placa_mae'].slots:
         raise ValidationError('A Placa mãe so possui {} slots, selecione uma quantidade menor ou igual.'.format(
             value['placa_mae'].slots))
     return value
