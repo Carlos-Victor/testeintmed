@@ -15,12 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from monteseupc.api.viewsets import MonteseupcViewSet
+from monteseupc.api.viewsets import *
 from rest_framework import routers, serializers, viewsets
 
 
 router = routers.DefaultRouter()
-router.register(r'api', MonteseupcViewSet)
+router.register(r'api/monteseupc', MonteseupcViewSet)
+router.register(r'api/processadores', ProcessadorViewSet)
+router.register(r'api/placamaes', Placa_maeViewSet)
+router.register(r'api/memorias', MemoriaViewSet)
+router.register(r'api/placasdevideo', Placa_de_videoViewSet)
 
 
 

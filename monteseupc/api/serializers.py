@@ -21,11 +21,12 @@ def validacao_placa_de_video(value):
 def validacao_quantidade_de_memoria(value):
     total_de_memoria_escolhida = int(
         re.sub("[^0-9]", '', value['tamanho_da_memoria'])) * int(value['quantidade_de_memoria'])
-    memoria_suportada = int(
+    tamanho_memorias = int(
         re.sub("[^0-9]", '', str(value['placa_mae'].memom_suportada)))
-    if total_de_memoria_escolhida > memoria_suportada:
+    print("TO AQUI", tamanho_memorias)
+    if total_de_memoria_escolhida > tamanho_memorias:
         raise ValidationError('A placa mãe so suporta {}GB de memoria, por favor escolha igual ou menor'.format(
-            memoria_suportada, total_de_memoria_escolhida))
+            tamanho_memorias, total_de_memoria_escolhida))
     return value
 
 
@@ -38,22 +39,18 @@ def validacao_quantidade_de_slots(value):
 
 class MonteseupcSerializer(ModelSerializer):
     processador = SlugRelatedField(
-        # many=True,
         slug_field='produto',
         queryset=Processador.objects.all()
     )
     placa_mae = SlugRelatedField(
-        # many=True,
         slug_field='produto',
         queryset=Placa_mae.objects.all()
     )
     memoria = SlugRelatedField(
-        # many=True,
         slug_field='produto',
         queryset=Memoria.objects.all()
     )
     placa_de_video = SlugRelatedField(
-        # many=True,
         slug_field='produto',
         allow_null=True,
         queryset=Placa_de_video.objects.all()
@@ -66,5 +63,32 @@ class MonteseupcSerializer(ModelSerializer):
         validators = [
             validator_marca_procesador,
             validacao_placa_de_video,
-            validacao_quantidade_de_slots
+            validacao_quantidade_de_slots,
+            validacao_quantidade_de_memoria,
+            
         ]
+
+
+class ProcessadorSerializer(ModelSerializer):
+    class Meta:
+        model = Processador
+        fields = ['produto', 'marca']
+
+
+class Placa_maeSerializer(ModelSerializer):
+    class Meta:
+        model = Placa_mae
+        fields = ['produto', 'processadores_suportados',
+                  'slots', 'memom_suportada', 'video_integrado']
+
+
+class MemoriaSerializer(ModelSerializer):
+    class Meta:
+        model = Memoria
+        fields = ['produto']
+
+
+class Placa_de_videoSerializer(ModelSerializer):
+    class Meta:
+        model = Placa_de_video
+        fields = ['produto']

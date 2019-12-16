@@ -12,15 +12,8 @@ processadores = [
     ('ambos', 'Intel e AMD'),
 ]
 slots_suportado = [
-    ('1', '1'),
     ('2', '2'),
-]
-memoria_suportada = [
-    ('1', '8'),
-    ('2', '12'),
-    ('3', '16'),
-    ('4', '32'),
-    ('5', '64'),
+    ('4', '4'),
 ]
 
 tamanho_memorias = [
@@ -55,7 +48,7 @@ class Placa_mae(models.Model):
     produto = models.CharField("Produto", max_length=50)
     processadores_suportados = models.CharField("Processador Suportado", choices=processadores,max_length=50)
     slots = models.IntegerField("Quantidade de Slots", choices=slots_suportado)
-    memom_suportada = models.IntegerField("Quantidade de Slots", choices=memoria_suportada)
+    memom_suportada = models.CharField("Memoria suportada", choices=tamanho_memorias, max_length=10)
     video_integrado = models.BooleanField("Video integrado", default=True)
     def __str__(self):
         return self.produto
