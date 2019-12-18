@@ -11,6 +11,10 @@
             <v-flex text-xs-center>
               <v-form ref="form" v-model="valid" lazy-validation>
                 {{ processador }}
+                {{ placa_mae }}
+                {{ memoria }}
+                {{ tamanho_da_memoria }}
+                {{ placa_de_video }}
                 <v-select
                   v-model="placa_mae"
                   :items="placa_mae_item"
@@ -52,7 +56,7 @@
                   required
                 ></v-text-field>
                 <v-select
-                  v-model="select"
+                  v-model="placa_de_video"
                   :items="placa_de_video_item"
                   item-text="produto"
                   label="Placa de vídeo"
@@ -64,7 +68,7 @@
                   class="mr-4"
                   @click="validate"
                 >
-                  Validate
+                  Enviar
                 </v-btn>
 
                 <v-btn color="error" class="mr-4" @click="reset">
@@ -127,6 +131,7 @@ export default {
         .then(response => (this.placa_de_video_item = response.data));
   },
   methods: {
+    
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
