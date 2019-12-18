@@ -31,4 +31,5 @@ router.register(r'api/placasdevideo', Placa_de_videoViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
      path('', include(router.urls)),
+     path('auth/', include('djoser.urls.authtoken')),
 ]
