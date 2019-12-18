@@ -32,7 +32,7 @@ def validacao_quantidade_de_memoria(value):
 
 def validacao_quantidade_de_slots(value):
     if value['quantidade_de_memoria'] > value['placa_mae'].slots:
-        raise HttpRespo('A Placa mãe so possui {} slots, selecione uma quantidade menor ou igual.'.format(
+        raise ValidationError('A Placa mãe so possui {} slots, selecione uma quantidade menor ou igual.'.format(
             value['placa_mae'].slots))
     return value
 
