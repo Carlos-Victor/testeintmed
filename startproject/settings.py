@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'monteseupc',
     'rest_framework',
     'rest_framework.authtoken',
-    'djoser',
     'corsheaders'
 ]
 

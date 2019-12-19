@@ -11,6 +11,7 @@ processadores = [
     ('AMD', 'Amd'),
     ('ambos', 'Intel e AMD'),
 ]
+
 slots_suportado = [
     ('2', '2'),
     ('4', '4'),

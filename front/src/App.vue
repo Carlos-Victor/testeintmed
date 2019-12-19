@@ -114,28 +114,28 @@ export default {
     axios
       .get("http://127.0.0.1:8081/api/processadores/", {
         headers: {
-          Authorization: "Token 2c04b7e063a330162cfca2e7a434db96e58671b7"
+          Authorization: "Token 02e646912abdc626cc20360238c2835ff90dbe9e"
         }
       })
       .then(response => (this.processador_item = response.data)),
       axios
         .get("http://127.0.0.1:8081/api/placamaes/", {
           headers: {
-            Authorization: "Token 2c04b7e063a330162cfca2e7a434db96e58671b7"
+            Authorization: "Token 02e646912abdc626cc20360238c2835ff90dbe9e"
           }
         })
         .then(response => (this.placa_mae_item = response.data)),
       axios
         .get("http://127.0.0.1:8081/api/memorias/", {
           headers: {
-            Authorization: "Token 2c04b7e063a330162cfca2e7a434db96e58671b7"
+            Authorization: "Token 02e646912abdc626cc20360238c2835ff90dbe9e"
           }
         })
         .then(response => (this.memoria_item = response.data)),
       axios
         .get("http://127.0.0.1:8081/api/placasdevideo/", {
           headers: {
-            Authorization: "Token 2c04b7e063a330162cfca2e7a434db96e58671b7"
+            Authorization: "Token 02e646912abdc626cc20360238c2835ff90dbe9e"
           }
         })
         .then(response => (this.placa_de_video_item = response.data));
@@ -145,7 +145,7 @@ export default {
       axios
         .post("http://127.0.0.1:8081/api/monteseupc/", montar, {
           headers: {
-            Authorization: "Token 2c04b7e063a330162cfca2e7a434db96e58671b7"
+            Authorization: "Token 02e646912abdc626cc20360238c2835ff90dbe9e"
           }
         })
         .then(response => {
