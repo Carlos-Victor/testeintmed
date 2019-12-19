@@ -151,8 +151,7 @@ export default {
         .then(response => {
           if (response.status == 201) {
             swal({
-              title: "Pedido Realizado",
-              text: "Pedido Realizado com Sucesso",
+              title: "Pedido Realizado com Sucesso",
               icon: "success",
               button: "OK"
             });
@@ -175,3 +174,13 @@ export default {
   }
 };
 </script>
+
+
+<style>
+.swal-text{
+  font-weight:600;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+</style>
