@@ -10,7 +10,7 @@
           <v-layout align-center justify-center>
             <v-flex text-xs-center>
               <v-form ref="form" v-model="valid" lazy-validation>
-                <v-select
+                <v-autocomplete
                   v-model="montar.placa_mae"
                   :items="placa_mae_item"
                   item-value="produto"
@@ -19,8 +19,8 @@
                   label="Placa Mãe"
                   no-data-text="Nenhuma placa mãe encontrada"
                   required
-                ></v-select>
-                <v-select
+                ></v-autocomplete>
+                <v-autocomplete
                   v-model="montar.processador"
                   :items="processador_item"
                   item-value="produto"
@@ -29,8 +29,8 @@
                   label="Processador"
                   no-data-text="Nenhum processador encontrada"
                   required
-                ></v-select>
-                <v-select
+                ></v-autocomplete>
+                <v-autocomplete
                   v-model="montar.memoria"
                   :items="memoria_item"
                   item-text="produto"
@@ -39,8 +39,8 @@
                   label="Memoria"
                   no-data-text="Nenhuma memoria encontrada"
                   required
-                ></v-select>
-                <v-select
+                ></v-autocomplete>
+                <v-autocomplete
                   v-model="montar.tamanho_da_memoria"
                   :items="tamanho_de_memoria_item"
                   item-text="produto"
@@ -48,7 +48,7 @@
                   :rules="[v => !!v || 'Você precisa selecionar um item']"
                   label="Tamanho da Memoria"
                   required
-                ></v-select>
+                ></v-autocomplete>
                 <v-text-field
                   v-model="montar.quantidade_de_memoria"
                   :counter="2"
@@ -57,16 +57,17 @@
                   label="Quantidade de mémoria"
                   required
                 ></v-text-field>
-                <v-select
+                <v-autocomplete
                   v-model="montar.placa_de_video"
                   :items="placa_de_video_item"
                   item-value="produto"
                   item-text="produto"
                   label="Placa de vídeo"
                   no-data-text="Nenhuma placa de video encontrada"
-                ></v-select>
+                ></v-autocomplete>
 
                 <v-btn
+                  :disabled="!valid"
                   color="success"
                   class="mr-4"
                   @click="salvar_montagem(montar)"
@@ -83,7 +84,7 @@
         </v-container>
       </v-content>
       <v-footer color="indigo" app>
-        <span class="white--text">&copy; 2019</span>
+        <span class="white--text">&copy; 2019 - Carlos Victor</span>
       </v-footer>
     </v-app>
   </div>
