@@ -10,12 +10,6 @@
           <v-layout align-center justify-center>
             <v-flex text-xs-center>
               <v-form ref="form" v-model="valid" lazy-validation>
-                {{ montar.processador }}
-                {{ montar.placa_mae }}
-                {{ montar.memoria }}
-                {{ montar.tamanho_da_memoria }}
-                {{ montar.placa_de_video }}
-                {{ montar.qnt_memoria }}
                 <v-select
                   v-model="montar.placa_mae"
                   :items="placa_mae_item"
@@ -73,7 +67,6 @@
                 ></v-select>
 
                 <v-btn
-                  :disabled="!valid"
                   color="success"
                   class="mr-4"
                   @click="salvar_montagem(montar)"
@@ -97,21 +90,24 @@
 </template>
 
 <script>
-import axios from 'axios'
-import swal from 'sweetalert';
+import axios from "axios";
+import swal from "sweetalert";
 
 export default {
   data: () => ({
     valid: true,
-    montar:{
-    processador_item: null,
+    processador_item : null,
+    placa_de_video_item :null,
     placa_mae_item: null,
     memoria_item: null,
-    placa_de_video_item: null,
-    quantidade_de_memoria: null
+    montar: {
+      processador: null,
+      placa_mae: null,
+      memoria: null,
+      placa_de_video: null,
+      quantidade_de_memoria: null
     },
     numberRules: [v => !!v || "Você precisa digitar a quantidade de memoria"],
-    select: null,
     tamanho_de_memoria_item: ["4GB", "8GB", "16GB", "32GB", "64GB"]
   }),
   mounted() {
@@ -144,34 +140,38 @@ export default {
         })
         .then(response => (this.placa_de_video_item = response.data));
   },
-    methods: {
+  methods: {
     salvar_montagem(montar) {
-        axios.post("http://127.0.0.1:8081/api/monteseupc/", montar,{
+      axios
+        .post("http://127.0.0.1:8081/api/monteseupc/", montar, {
           headers: {
-          Authorization: "Token 2c04b7e063a330162cfca2e7a434db96e58671b7"
-        }
-        }).then(response => {
-          if (response.status == 201){
-              swal({
-                title: "Pedido Realizado",
-                text: "Pedido Realizado com Sucesso",
-                icon: "success",
-                button: "OK",
-              })}
-            }).catch(function (error) {
-        if (error.response.status != 201){
-          swal({
-                title: "Erro ao realizar pedido",
-                text: error.response.data.non_field_errors[0],
-                icon: "error",
-                button: "OK",
-              })
-        }
-    })
+            Authorization: "Token 2c04b7e063a330162cfca2e7a434db96e58671b7"
+          }
+        })
+        .then(response => {
+          if (response.status == 201) {
+            swal({
+              title: "Pedido Realizado",
+              text: "Pedido Realizado com Sucesso",
+              icon: "success",
+              button: "OK"
+            });
+          }
+        })
+        .catch(function(error) {
+          if (error.response.status != 201) {
+            swal({
+              title: "Erro ao realizar pedido",
+              text: error.response.data.non_field_errors[0],
+              icon: "error",
+              button: "OK"
+            });
+          }
+        });
     },
     reset() {
       this.$refs.form.reset();
     }
-    },
+  }
 };
 </script>
