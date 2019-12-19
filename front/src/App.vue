@@ -98,7 +98,7 @@
 
 <script>
 import axios from 'axios'
-import Swal from 'sweetalert';
+import swal from 'sweetalert';
 
 export default {
   data: () => ({
@@ -144,18 +144,28 @@ export default {
         })
         .then(response => (this.placa_de_video_item = response.data));
   },
-    methods: {    
+    methods: {
     salvar_montagem(montar) {
         axios.post("http://127.0.0.1:8081/api/monteseupc/", montar,{
           headers: {
           Authorization: "Token 2c04b7e063a330162cfca2e7a434db96e58671b7"
         }
-        }).catch(function (error) {
+        }).then(response => {
+          if (response.status == 201){
+              swal({
+                title: "Pedido Realizado",
+                text: "Pedido Realizado com Sucesso",
+                icon: "success",
+                button: "OK",
+              })}
+            }).catch(function (error) {
         if (error.response.status != 201){
-            Swal.fire({
-            icon: 'error',
-            title: 'Erro na combinação',
-            text: error.response.data.non_field_errors[0],})
+          swal({
+                title: "Erro ao realizar pedido",
+                text: error.response.data.non_field_errors[0],
+                icon: "error",
+                button: "OK",
+              })
         }
     })
     },
@@ -164,5 +174,4 @@ export default {
     }
     },
 };
-
 </script>
