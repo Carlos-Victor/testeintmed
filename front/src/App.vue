@@ -1,14 +1,12 @@
 <template>
-  <div id="app">
     <v-app id="inspire">
       <v-app-bar app color="indigo" dark>
         <v-toolbar-title>Monte seu PC</v-toolbar-title>
       </v-app-bar>
-
       <v-content>
         <v-container fluid fill-height>
-          <v-layout align-center justify-center>
-            <v-flex text-xs-center>
+          <v-layout cols="12" class="d-flex justify-center" align-center justify-center>
+            <v-flex text-xs-center xs12 sm12 md8 lg8 xl6>
               <v-form ref="form" v-model="valid" lazy-validation>
                 <v-autocomplete
                   v-model="montar.placa_mae"
@@ -87,7 +85,6 @@
         <span class="white--text">&copy; 2019 - Carlos Victor</span>
       </v-footer>
     </v-app>
-  </div>
 </template>
 
 <script>
@@ -111,6 +108,13 @@ export default {
     numberRules: [v => !!v || "Você precisa digitar a quantidade de memoria"],
     tamanho_de_memoria_item: ["4GB", "8GB", "16GB", "32GB", "64GB"]
   }),
+  watch:{
+      "montar.placa_de_video":function(){
+        if (this.montar.placa_de_video=='(Nenhuma)'){
+            this.montar.placa_de_video = null
+        }
+      }
+  },
   mounted() {
     axios
       .get("http://127.0.0.1:8081/api/processadores/", {
@@ -139,7 +143,12 @@ export default {
             Authorization: "Token 02e646912abdc626cc20360238c2835ff90dbe9e"
           }
         })
-        .then(response => (this.placa_de_video_item = response.data));
+        .then(response =>{
+          this.placa_de_video_item = response.data
+          this.placa_de_video_item.unshift({
+              "produto":"(Nenhuma)"
+          })
+        });
   },
   methods: {
     salvar_montagem(montar) {
@@ -182,6 +191,10 @@ export default {
   font-weight:600;
   text-align: center;
   text-transform: capitalize;
+}
+
+.container-form-max{
+    max-width: 900px;
 }
 
 </style>
