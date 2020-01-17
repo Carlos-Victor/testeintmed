@@ -1,4 +1,16 @@
 [
+
+    { 
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "monteseupc",
+            "password": "pbkdf2_sha256$150000$HAiCVxOQVvAc$F8Iiqfm/41UnarjL82yf5k3j4BsavLVW4U33O4zXKzE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
     {
         "model": "monteseupc.Processador",
         "pk": 1,
