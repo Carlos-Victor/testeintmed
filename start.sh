@@ -24,7 +24,6 @@ pip install Django django-rest-framework django-cors-headers
     echo "|                                                              |"
     echo "|         Pacotes Instalados, Rodando Migrates                 |"
     echo -e "|______________________________________________________________|${NC}"
-
 python manage.py migrate
     echo -e "${green} ______________________________________________________________"
     echo "|                                                              |"
@@ -35,9 +34,10 @@ python manage.py loaddata fixture.json
     echo "|                                                              |"
     echo "|         Banco Populado, Gerando Token e Salvando em uma ENV  |"
     echo -e "|______________________________________________________________|${NC}"
-python manage.py generator_token
-    echo -e "${green} ______________________________________________________________"
-    echo "|                                                              |"
-    echo "|               Token Gerado e configurado                     |"
-    echo -e "|______________________________________________________________|${NC}"
+
+# python manage.py generator_token
+#     echo -e "${green} ______________________________________________________________"
+#     echo "|                                                              |"
+#     echo "|               Token Gerado e configurado                     |"
+#     echo -e "|______________________________________________________________|${NC}"
 
